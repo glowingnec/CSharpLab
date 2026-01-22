@@ -1,5 +1,9 @@
 <Solution>
   <Folder Name="/Lab3/">
+    <Project Path="Lab3/BT1/BT1.csproj" Id="609f7d0d-f044-4b61-9c8c-259997a072c9" />
+    <Project Path="Lab3/BT2/BT2.csproj" Id="b8befa80-df3f-4f70-af2b-8bf5e555be47" />
+    <Project Path="Lab3/BT3/BT3.csproj" Id="0774bfee-5e47-4485-8dc8-8a4a57b6abcb" />
+    <Project Path="Lab3/BT4/BT4.csproj" Id="c5929315-d275-4590-a286-8b784c1228ca" />
     <Project Path="Lab3/Lab61/Lab61.csproj" Id="910df519-f600-44e1-9434-e0584e9f7f80" />
     <Project Path="Lab3/Lab62/Lab62.csproj" Id="aef62869-1edb-4556-b186-c0d9b44acc99" />
     <Project Path="Lab3/Lab63/Lab63.csproj" Id="0f5814fb-ce9c-41b8-af2e-dd91d11ab993" />
