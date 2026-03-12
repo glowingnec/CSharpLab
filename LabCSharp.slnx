@@ -8,4 +8,10 @@
     <Project Path="Lab3/Lab62/Lab62.csproj" Id="aef62869-1edb-4556-b186-c0d9b44acc99" />
     <Project Path="Lab3/Lab63/Lab63.csproj" Id="0f5814fb-ce9c-41b8-af2e-dd91d11ab993" />
   </Folder>
+  <Folder Name="/Lab4/">
+    <Project Path="Bai2/Bai2.csproj" Id="b920e4b6-3505-42f7-84c2-eae854bdda91" />
+    <Project Path="Lab4/Bai1/Bai1.csproj" Id="0686c4b7-e4de-47e7-8f23-daeb614b7247" />
+  </Folder>
+  <Project Path="Lab6/Lab6/Lab6.csproj" Id="429378ca-593b-485d-9ac1-105a9de3711d" />
+  <Project Path="WinformQLSV/QLSV.csproj" Id="c3d61aae-e26a-4848-a4a7-884e81e62402" />
 </Solution>
