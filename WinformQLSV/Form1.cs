@@ -19,20 +19,52 @@ namespace Winform1
 
         private void label1_Click(object sender, EventArgs e)
         {
-
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btn_login_Click(object sender, EventArgs e)
         {
-            Main mainForm = new Main();
-            mainForm.Show();
+            string username = txt_usr.Text.Trim();
+            string pass = txt_pass.Text.Trim();
 
-            this.Hide();
-        }
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(pass))
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ tài khoản và mật khẩu", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+           
+                using (var db = new DataClasses1DataContext())
+                {
+                    bool tinChuan = db.TaiKhoans.Any(tk =>
+                        tk.TenDangNhap == username && tk.MatKhau == pass);
+
+                    if (tinChuan)
+                    {
+                        Main mainForm = new Main();
+                        mainForm.FormClosed += (s, args) => this.Close();
+                        mainForm.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sai tên tk hoặc mật khẩu", "Lỗi",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txt_pass.Clear();
+                        txt_pass.Focus();
+                    }
+                }
+            }
+            
+        
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            txt_pass.UseSystemPasswordChar = true;
+        }
 
+        private void lb2_Click(object sender, EventArgs e)
+        {
         }
     }
 }
