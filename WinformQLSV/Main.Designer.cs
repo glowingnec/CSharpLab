@@ -65,6 +65,7 @@
             // bt_them_sv
             // 
             this.bt_them_sv.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.bt_them_sv.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.bt_them_sv.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_them_sv.ForeColor = System.Drawing.Color.Cornsilk;
             this.bt_them_sv.Location = new System.Drawing.Point(27, 47);
@@ -78,6 +79,7 @@
             // bt_sua_sv
             // 
             this.bt_sua_sv.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.bt_sua_sv.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.bt_sua_sv.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_sua_sv.ForeColor = System.Drawing.Color.Cornsilk;
             this.bt_sua_sv.Location = new System.Drawing.Point(27, 102);
@@ -91,6 +93,7 @@
             // bt_xoa_sv
             // 
             this.bt_xoa_sv.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.bt_xoa_sv.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.bt_xoa_sv.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_xoa_sv.ForeColor = System.Drawing.Color.Cornsilk;
             this.bt_xoa_sv.Location = new System.Drawing.Point(27, 161);
