@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.dgvSinhVien = new System.Windows.Forms.DataGridView();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.bt_them_sv = new System.Windows.Forms.Button();
@@ -46,29 +47,30 @@
             // dgvSinhVien
             // 
             this.dgvSinhVien.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSinhVien.Location = new System.Drawing.Point(13, 47);
+            this.dgvSinhVien.Location = new System.Drawing.Point(13, 60);
             this.dgvSinhVien.Name = "dgvSinhVien";
             this.dgvSinhVien.RowHeadersWidth = 51;
             this.dgvSinhVien.RowTemplate.Height = 24;
-            this.dgvSinhVien.Size = new System.Drawing.Size(719, 412);
+            this.dgvSinhVien.Size = new System.Drawing.Size(719, 399);
             this.dgvSinhVien.TabIndex = 0;
             // 
             // txtTimKiem
             // 
             this.txtTimKiem.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtTimKiem.Location = new System.Drawing.Point(78, 15);
+            this.txtTimKiem.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTimKiem.Location = new System.Drawing.Point(94, 14);
             this.txtTimKiem.Name = "txtTimKiem";
-            this.txtTimKiem.Size = new System.Drawing.Size(209, 22);
+            this.txtTimKiem.Size = new System.Drawing.Size(209, 30);
             this.txtTimKiem.TabIndex = 2;
             this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             // 
             // bt_them_sv
             // 
-            this.bt_them_sv.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.bt_them_sv.BackColor = System.Drawing.SystemColors.Highlight;
             this.bt_them_sv.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.bt_them_sv.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_them_sv.ForeColor = System.Drawing.Color.Cornsilk;
-            this.bt_them_sv.Location = new System.Drawing.Point(27, 47);
+            this.bt_them_sv.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_them_sv.ForeColor = System.Drawing.Color.White;
+            this.bt_them_sv.Location = new System.Drawing.Point(28, 60);
             this.bt_them_sv.Name = "bt_them_sv";
             this.bt_them_sv.Size = new System.Drawing.Size(143, 35);
             this.bt_them_sv.TabIndex = 0;
@@ -78,11 +80,11 @@
             // 
             // bt_sua_sv
             // 
-            this.bt_sua_sv.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.bt_sua_sv.BackColor = System.Drawing.SystemColors.Highlight;
             this.bt_sua_sv.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.bt_sua_sv.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_sua_sv.ForeColor = System.Drawing.Color.Cornsilk;
-            this.bt_sua_sv.Location = new System.Drawing.Point(27, 102);
+            this.bt_sua_sv.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_sua_sv.ForeColor = System.Drawing.Color.White;
+            this.bt_sua_sv.Location = new System.Drawing.Point(28, 118);
             this.bt_sua_sv.Name = "bt_sua_sv";
             this.bt_sua_sv.Size = new System.Drawing.Size(143, 35);
             this.bt_sua_sv.TabIndex = 1;
@@ -92,11 +94,11 @@
             // 
             // bt_xoa_sv
             // 
-            this.bt_xoa_sv.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.bt_xoa_sv.BackColor = System.Drawing.SystemColors.Highlight;
             this.bt_xoa_sv.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.bt_xoa_sv.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_xoa_sv.ForeColor = System.Drawing.Color.Cornsilk;
-            this.bt_xoa_sv.Location = new System.Drawing.Point(27, 161);
+            this.bt_xoa_sv.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_xoa_sv.ForeColor = System.Drawing.Color.White;
+            this.bt_xoa_sv.Location = new System.Drawing.Point(28, 174);
             this.bt_xoa_sv.Name = "bt_xoa_sv";
             this.bt_xoa_sv.Size = new System.Drawing.Size(143, 35);
             this.bt_xoa_sv.TabIndex = 2;
@@ -107,10 +109,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(23, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(152, 20);
+            this.label1.Size = new System.Drawing.Size(150, 25);
             this.label1.TabIndex = 3;
             this.label1.Text = "Phần mềm QLSV";
             this.label1.Click += new System.EventHandler(this.label1_Click_1);
@@ -123,6 +125,7 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.splitContainer2.Panel1.Controls.Add(this.label1);
             this.splitContainer2.Panel1.Controls.Add(this.bt_xoa_sv);
             this.splitContainer2.Panel1.Controls.Add(this.bt_sua_sv);
@@ -130,6 +133,7 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.splitContainer2.Panel2.Controls.Add(this.label2);
             this.splitContainer2.Panel2.Controls.Add(this.txtTimKiem);
             this.splitContainer2.Panel2.Controls.Add(this.dgvSinhVien);
@@ -141,9 +145,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 18);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(9, 18);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 16);
+            this.label2.Size = new System.Drawing.Size(79, 23);
             this.label2.TabIndex = 3;
             this.label2.Text = "Tìm kiếm";
             // 
@@ -153,8 +158,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(945, 471);
             this.Controls.Add(this.splitContainer2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
-            this.Text = "Main";
+            this.Text = "QLSV";
             this.Load += new System.EventHandler(this.Main_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSinhVien)).EndInit();
             this.splitContainer2.Panel1.ResumeLayout(false);
