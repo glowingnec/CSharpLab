@@ -11,6 +11,7 @@ namespace Winform1
         public Main()
         {
             InitializeComponent();
+
         }
 
         private class SinhVienInput
@@ -69,6 +70,18 @@ namespace Winform1
                 if (dgvSinhVien.Columns["Lop"] != null) dgvSinhVien.Columns["Lop"].HeaderText = "Lớp";
             }
         }
+        private string[] GetDanhSachLop()
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                return db.SinhViens
+                    .Where(s => s.Lop != null && s.Lop.Trim() != "")
+                    .Select(s => s.Lop.Trim())
+                    .Distinct()
+                    .OrderBy(l => l)
+                    .ToArray();
+            }
+        }
 
         private bool CheckMaSV(out string maSV)
         {
@@ -107,7 +120,7 @@ namespace Winform1
             using (var txtHoTen = new TextBox())
             using (var cboGioiTinh = new ComboBox())
             using (var dtNgaySinh = new DateTimePicker())
-            using (var txtLop = new TextBox())
+            using (var cboLop = new ComboBox())
             using (var btnOk = new Button())
             using (var btnCancel = new Button())
             {
@@ -154,8 +167,16 @@ namespace Winform1
                 lblLop.Location = new Point(20, 160);
                 lblLop.AutoSize = true;
 
-                txtLop.Location = new Point(120, 156);
-                txtLop.Width = 220;
+                cboLop.Location = new Point(120, 156);
+                cboLop.Width = 220;
+                cboLop.DropDownStyle = ComboBoxStyle.DropDownList;
+
+                var dsLop = GetDanhSachLop();
+                cboLop.Items.Clear();
+                foreach (var lopItem in dsLop)
+                {
+                    cboLop.Items.Add(lopItem);
+                }
 
                 btnOk.Text = "Lưu";
                 btnOk.Location = new Point(184, 200);
@@ -171,7 +192,7 @@ namespace Winform1
                     lblHoTen, txtHoTen,
                     lblGioiTinh, cboGioiTinh,
                     lblNgaySinh, dtNgaySinh,
-                    lblLop, txtLop,
+                    lblLop, cboLop,
                     btnOk, btnCancel
                 });
 
@@ -182,7 +203,7 @@ namespace Winform1
                 {
                     txtMaSV.Text = current.MaSV;
                     txtHoTen.Text = current.HoTen;
-                    txtLop.Text = current.Lop;
+                    cboLop.SelectedItem = current.Lop;
 
                     if (!string.IsNullOrWhiteSpace(current.GioiTinh))
                     {
@@ -198,11 +219,24 @@ namespace Winform1
                     {
                         dtNgaySinh.Checked = false;
                     }
+
+                    if (!string.IsNullOrWhiteSpace(current.Lop))
+                    {
+                        if (!cboLop.Items.Contains(current.Lop))
+                        {
+                            cboLop.Items.Add(current.Lop);
+                        }
+                        cboLop.SelectedItem = current.Lop;
+                    }
                 }
 
                 if (!isEdit && cboGioiTinh.SelectedIndex < 0)
                 {
                     cboGioiTinh.SelectedIndex = 0;
+                }
+                if (cboLop.SelectedIndex < 0 && cboLop.Items.Count > 0)
+                {
+                    cboLop.SelectedIndex = 0;
                 }
 
                 txtMaSV.ReadOnly = isEdit;
@@ -214,13 +248,20 @@ namespace Winform1
 
                 var maSV = txtMaSV.Text.Trim();
                 var hoTen = txtHoTen.Text.Trim();
-                var lop = txtLop.Text.Trim();
+                var lop = cboLop.SelectedItem == null ? string.Empty : cboLop.SelectedItem.ToString();
                 var gioiTinh = cboGioiTinh.SelectedItem == null ? string.Empty : cboGioiTinh.SelectedItem.ToString();
                 DateTime? ngaySinh = dtNgaySinh.Checked ? (DateTime?)dtNgaySinh.Value.Date : null;
 
                 if (string.IsNullOrWhiteSpace(maSV))
                 {
                     MessageBox.Show("Mã SV không được để trống.", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+
+                if (string.IsNullOrWhiteSpace(lop))
+                {
+                    MessageBox.Show("Vui lòng chọn lớp.", "Thông báo",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 }
