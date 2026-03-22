@@ -52,6 +52,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Class.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Class.Designer.cs">
+      <DependentUpon>Class.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +72,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Class.resx">
+      <DependentUpon>Class.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>

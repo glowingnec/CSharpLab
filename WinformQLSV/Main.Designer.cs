@@ -37,6 +37,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.label2 = new System.Windows.Forms.Label();
+            this.bt_quan_ly_lop = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSinhVien)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -112,9 +113,9 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(23, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(150, 25);
+            this.label1.Size = new System.Drawing.Size(155, 25);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Phần mềm QLSV";
+            this.label1.Text = "Quản lý sinh viên";
             this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // splitContainer2
@@ -126,6 +127,7 @@
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.splitContainer2.Panel1.Controls.Add(this.bt_quan_ly_lop);
             this.splitContainer2.Panel1.Controls.Add(this.label1);
             this.splitContainer2.Panel1.Controls.Add(this.bt_xoa_sv);
             this.splitContainer2.Panel1.Controls.Add(this.bt_sua_sv);
@@ -151,6 +153,20 @@
             this.label2.Size = new System.Drawing.Size(79, 23);
             this.label2.TabIndex = 3;
             this.label2.Text = "Tìm kiếm";
+            // 
+            // bt_quan_ly_lop
+            // 
+            this.bt_quan_ly_lop.BackColor = System.Drawing.SystemColors.Highlight;
+            this.bt_quan_ly_lop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.bt_quan_ly_lop.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_quan_ly_lop.ForeColor = System.Drawing.Color.White;
+            this.bt_quan_ly_lop.Location = new System.Drawing.Point(30, 410);
+            this.bt_quan_ly_lop.Name = "bt_quan_ly_lop";
+            this.bt_quan_ly_lop.Size = new System.Drawing.Size(143, 35);
+            this.bt_quan_ly_lop.TabIndex = 4;
+            this.bt_quan_ly_lop.Text = "Quản lý lớp học";
+            this.bt_quan_ly_lop.UseVisualStyleBackColor = false;
+            this.bt_quan_ly_lop.Click += new System.EventHandler(this.bt_quan_ly_lop_Click);
             // 
             // Main
             // 
@@ -183,5 +199,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button bt_quan_ly_lop;
     }
 }

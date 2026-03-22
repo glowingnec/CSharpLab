@@ -20,7 +20,13 @@ namespace Winform1
             public string HoTen { get; set; }
             public string GioiTinh { get; set; }
             public DateTime? NgaySinh { get; set; }
-            public string Lop { get; set; }
+            public string MaLop { get; set; }
+            public string TenLop { get; set; }
+        }
+        private class LopOption
+        {
+            public string MaLop { get; set; }
+            public string TenLop { get; set; }
         }
 
         private void Main_Load_1(object sender, EventArgs e)
@@ -39,25 +45,38 @@ namespace Winform1
 
             using (var db = new DataClasses1DataContext())
             {
-                var query = db.SinhViens.AsQueryable();
+                var query =
+                    from sv in db.SinhViens
+                    join lh in db.LopHocs on sv.MaLop equals lh.MaLop into gj
+                    from lh in gj.DefaultIfEmpty()
+                    select new
+                    {
+                        sv.MaSV,
+                        sv.HoTen,
+                        sv.GioiTinh,
+                        sv.NgaySinh,
+                        sv.MaLop,
+                        TenLop = lh == null ? "" : lh.TenLop
+                    };
 
                 if (!string.IsNullOrEmpty(keyword))
                 {
-                    query = query.Where(sv =>
-                        (sv.MaSV ?? "").Contains(keyword) ||
-                        (sv.HoTen ?? "").Contains(keyword) ||
-                        (sv.Lop ?? "").Contains(keyword));
+                    query = query.Where(x =>
+                        (x.MaSV ?? "").Contains(keyword) ||
+                        (x.HoTen ?? "").Contains(keyword) ||
+                        (x.MaLop ?? "").Contains(keyword) ||
+                        (x.TenLop ?? "").Contains(keyword));
                 }
 
                 var data = query
-                    .OrderBy(sv => sv.MaSV)
-                    .Select(sv => new
+                    .OrderBy(x => x.MaSV)
+                    .Select(x => new
                     {
-                        MaSV = sv.MaSV,
-                        HoTen = sv.HoTen,
-                        GioiTinh = sv.GioiTinh,
-                        NgaySinh = sv.NgaySinh,
-                        Lop = sv.Lop
+                        MaSV = x.MaSV,
+                        HoTen = x.HoTen,
+                        GioiTinh = x.GioiTinh,
+                        NgaySinh = x.NgaySinh,
+                        Lop = x.TenLop
                     })
                     .ToList();
 
@@ -70,15 +89,18 @@ namespace Winform1
                 if (dgvSinhVien.Columns["Lop"] != null) dgvSinhVien.Columns["Lop"].HeaderText = "Lớp";
             }
         }
-        private string[] GetDanhSachLop()
+        private LopOption[] GetDanhSachLop()
         {
             using (var db = new DataClasses1DataContext())
             {
-                return db.SinhViens
-                    .Where(s => s.Lop != null && s.Lop.Trim() != "")
-                    .Select(s => s.Lop.Trim())
-                    .Distinct()
-                    .OrderBy(l => l)
+                return db.LopHocs
+                    .Where(l => l.MaLop != null && l.MaLop.Trim() != "")
+                    .OrderBy(l => l.MaLop)
+                    .Select(l => new LopOption
+                    {
+                        MaLop = l.MaLop,
+                        TenLop = l.TenLop
+                    })
                     .ToArray();
             }
         }
@@ -172,11 +194,9 @@ namespace Winform1
                 cboLop.DropDownStyle = ComboBoxStyle.DropDownList;
 
                 var dsLop = GetDanhSachLop();
-                cboLop.Items.Clear();
-                foreach (var lopItem in dsLop)
-                {
-                    cboLop.Items.Add(lopItem);
-                }
+                cboLop.DataSource = dsLop;
+                cboLop.DisplayMember = "TenLop";
+                cboLop.ValueMember = "MaLop";
 
                 btnOk.Text = "Lưu";
                 btnOk.Location = new Point(184, 200);
@@ -203,7 +223,6 @@ namespace Winform1
                 {
                     txtMaSV.Text = current.MaSV;
                     txtHoTen.Text = current.HoTen;
-                    cboLop.SelectedItem = current.Lop;
 
                     if (!string.IsNullOrWhiteSpace(current.GioiTinh))
                     {
@@ -220,13 +239,9 @@ namespace Winform1
                         dtNgaySinh.Checked = false;
                     }
 
-                    if (!string.IsNullOrWhiteSpace(current.Lop))
+                    if (!string.IsNullOrWhiteSpace(current.MaLop))
                     {
-                        if (!cboLop.Items.Contains(current.Lop))
-                        {
-                            cboLop.Items.Add(current.Lop);
-                        }
-                        cboLop.SelectedItem = current.Lop;
+                        cboLop.SelectedValue = current.MaLop;
                     }
                 }
 
@@ -248,7 +263,8 @@ namespace Winform1
 
                 var maSV = txtMaSV.Text.Trim();
                 var hoTen = txtHoTen.Text.Trim();
-                var lop = cboLop.SelectedItem == null ? string.Empty : cboLop.SelectedItem.ToString();
+                var maLop = cboLop.SelectedValue == null ? string.Empty : cboLop.SelectedValue.ToString();
+                var tenLop = cboLop.Text == null ? string.Empty : cboLop.Text.Trim();
                 var gioiTinh = cboGioiTinh.SelectedItem == null ? string.Empty : cboGioiTinh.SelectedItem.ToString();
                 DateTime? ngaySinh = dtNgaySinh.Checked ? (DateTime?)dtNgaySinh.Value.Date : null;
 
@@ -259,7 +275,7 @@ namespace Winform1
                     return false;
                 }
 
-                if (string.IsNullOrWhiteSpace(lop))
+                if (string.IsNullOrWhiteSpace(maLop))
                 {
                     MessageBox.Show("Vui lòng chọn lớp.", "Thông báo",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -272,7 +288,8 @@ namespace Winform1
                     HoTen = hoTen,
                     GioiTinh = gioiTinh,
                     NgaySinh = ngaySinh,
-                    Lop = lop
+                    MaLop = maLop,
+                    TenLop = tenLop
                 };
 
                 return true;
@@ -305,7 +322,7 @@ namespace Winform1
                         HoTen = input.HoTen,
                         GioiTinh = input.GioiTinh,
                         NgaySinh = input.NgaySinh,
-                        Lop = input.Lop
+                        MaLop = input.MaLop
                     };
 
                     db.SinhViens.InsertOnSubmit(sv);
@@ -345,7 +362,11 @@ namespace Winform1
                     HoTen = sv.HoTen,
                     GioiTinh = sv.GioiTinh,
                     NgaySinh = sv.NgaySinh,
-                    Lop = sv.Lop
+                    MaLop = sv.MaLop,
+                    TenLop = db.LopHocs
+                        .Where(l => l.MaLop == sv.MaLop)
+                        .Select(l => l.TenLop)
+                        .FirstOrDefault()
                 };
 
                 SinhVienInput edited;
@@ -359,7 +380,7 @@ namespace Winform1
                     sv.HoTen = edited.HoTen;
                     sv.GioiTinh = edited.GioiTinh;
                     sv.NgaySinh = edited.NgaySinh;
-                    sv.Lop = edited.Lop;
+                    sv.MaLop = edited.MaLop;
                     db.SubmitChanges();
 
                     LoadData(txtTimKiem.Text);
@@ -423,6 +444,13 @@ namespace Winform1
 
         private void splitContainer2_Panel2_Paint(object sender, PaintEventArgs e) { }
         private void label1_Click_1(object sender, EventArgs e) { }
-        
+
+        private void bt_quan_ly_lop_Click(object sender, EventArgs e)
+        {
+            using (var frm = new Class())
+            {
+                frm.ShowDialog(this); // mở dạng modal
+            }
+        }
     }
 }
